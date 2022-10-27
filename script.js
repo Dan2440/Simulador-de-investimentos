@@ -39,7 +39,7 @@ $(function() {
 
         // Função que gera os meses e anos.
         (function() {
-            for (let months = 1; months <= 100; months++) {
+            for (let months = 1; months <= 600; months++) {
                 const value = months;
                 
                 /* Formata os meses e anos de forma 
