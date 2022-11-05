@@ -11,6 +11,11 @@
     bottom: 40px;
 }
 
+#title-simulator {
+  color: #FFF;
+  font-weight: bold;
+}
+
 @media (min-height: 580px){
   .container {
     padding: 10vh;
@@ -74,11 +79,6 @@
 
 .btn-primary:active {
   background-color: #d63031;
-}
-
-#simulatorTitle {
-  color: #FFF;
-  font-weight: bold;
 }
 
 .resultados {
@@ -156,6 +156,13 @@ h2 {
 }
 
 .infos3 {
+    margin-top: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    display: none;
+}
+
+.infos4 {
     margin-top: 10px;
     text-align: justify;
     text-justify: inter-word;
