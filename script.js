@@ -25,6 +25,14 @@ function PPC() {
         $("#PPC").slideToggle("slow")
     }
 }   
+function RVB() {
+    const inf = document.querySelector(".infos4")
+    if (inf.style.display === "block") {
+        $("#RVB").slideToggle("slow")
+    } else {
+        $("#RVB").slideToggle("slow")
+    }
+}   
 /*----------------------*/
 
 
@@ -73,7 +81,7 @@ $(function() {
         // Input que solicita o nome do usuário.
         const name = $("#name").val();
         // Input que solicita a mensalidade.
-        const payment = $("#payment").val();
+        let payment = $("#payment").val();
         // Input que solicita o aporte inicial.
         const valueInit = $("#value-init").val();
         // Input qye solicita o tempo de contribuição.
@@ -92,35 +100,50 @@ $(function() {
         
         /* Multiplica o valor total pelos
         meses.*/
-        let montante = parseFloat(valueInit) + payment * contributionTime
-        
+        let montante = (parseFloat(valueInit) + parseFloat(payment)) * parseFloat(contributionTime)
+
         // Valores dos investimentos.
         TS = 0
         IPCA = 0
         PP = 0
+        RV = 0
         
         // Juros.
-        jct_CDI = 0
+        jct_TS = 0
         jct_IPCA = 0
         jct_PP = 0
+        jct_RV = 0
+        
+        jurosAcm = parseFloat(payment)
+        jurosAcm2 = parseFloat(payment)
+        jurosAcm3 = parseFloat(payment)
+        jurosAcm4 = parseFloat(payment)
         
         /* Calcula as taxas e soma mês a mês  */
-        for (let i = 0; i < contributionTime; i++) {
-            TS = (payment * 1.07) / 100
-            jct_CDI += TS
+        for (var i = 0; i < parseFloat(contributionTime); i++) {
+            TS = (jurosAcm * 1.07) / 100
+            jct_TS += TS
+            jurosAcm += TS
             
-            IPCA = (payment * 0.4) / 100
+            IPCA = (jurosAcm2 * 0.4) / 100
             jct_IPCA += IPCA
+            jurosAcm3 += IPCA
             
-            PP = (payment * 0.5) / 100
+            PP = (jurosAcm3 * 0.5) / 100
             jct_PP += PP
+            jurosAcm3 += PP
+            
+            RV = (jurosAcm4 * 1.57) / 100
+            jct_RV += RV
+            jurosAcm4 += RV
         }
-        
+
         // Soma o montante + juros
-        let valorTS = montante + jct_CDI
+        let valorTS = montante + jct_TS
         let valorIPCA = montante + jct_IPCA
         let valorPP = montante + jct_PP
-        
+        let valorRV = montante + jct_RV
+
         
         /* Formata os resultados obtidos nos
         cálculos para uma melhor visualização.*/
@@ -137,11 +160,48 @@ $(function() {
             currency: "BRL",
         }).format(valorPP)
         
+        let RV_Format = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(valorRV)
+        
+        let jctTS_F = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(jct_TS)
+        
+        let jctRV_F = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(jct_RV)
+        
+        let jctPP_F = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(jct_PP)
+        
+        let jctIPCA_F = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(jct_IPCA)
+        
+        
+        
         /* Manda os resultados dos cálculos
         para a página.*/
-        $("#TS").html(CDI_Format)
+        $("#TS").html("Valor Total: " + CDI_Format)
         $("#IPCA").html(IPCA_Format)
         $("#PP").html(PP_Format)
+        $("#RV").html("Valor Total: " + RV_Format)
+        
+        const infRV = jctRV_F + ' ao mês'
+        $("#RVinf").html(infRV)
+        const infTS = jctTS_F + ' ao mês'
+        $("#TSinf").html(infTS)
+        const infIPCA = jctIPCA_F + ' ao mês'
+        $("#IPCAinf").html(infIPCA)
+        const infPP = jctPP_F + ' ao mês'
+        $("#PPinf").html(infPP)
         
         // Mensagem de sucesso.
         const output = `Olá <strong>${name}</strong>, aqui está uma estimativa
