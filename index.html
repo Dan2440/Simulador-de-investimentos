@@ -14,22 +14,17 @@
 </head>
 <body>
     <div id="screen1" class="container">
-        
         <div class="logo">
             <img class="imgLogo" src="logo.png">
         </div>
-        
-        <form id="inputForm" action="javascript:void(0);" method="POST">
+        <form id="inputForm" action="javascript:void(0);">
             <div id="formCard" class="card">
-                
                 <div class="card-header text-center">
-                    <h5 id="simulatorTitle">
+                    <h5 id="title-simulator">
                         Simulador de Investimentos
                     </h5>
                 </div>
-                
                 <div class="card-body">
-                    
                     <div class="form-group row">
                         <label for="name" class="col-sm-5 col-form-label text-center">
                             Nome
@@ -39,129 +34,139 @@
                         </div>
                     </div>
                     <hr />
-
-                <div class="form-group row">
-                    
-                    <label for="value-init" class="col-sm-5 col-form-label text-center">
-                        Aporte inicial
-                    </label>
-                    
-                    <div class="col-sm-7">
-                        
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                
-                                <div class="input-group-text">
-                                    R$
+                    <div class="form-group row">
+                        <label for="value-init" class="col-sm-5 col-form-label text-center">
+                            Aporte inicial
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        R$
+                                    </div>
                                 </div>
-                                
+                                <input id="value-init" class="form-control" type="number" placeholder="Ex.: 20,00" min="1" step="0.50" required>
                             </div>
-                            <input id="value-init" class="form-control" type="number" placeholder="Ex.: 20,00" min="1" step="0.50" required>
                         </div>
-                        
+                        <label for="payment" class="col-sm-5 col-form-label text-center">
+                            Mensalidade
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        R$
+                                    </div>
+                                </div>
+                                <input id="payment" class="form-control" type="number" placeholder="Ex.: 20,00" min="1" step="0.50" required>
+                            </div>
+                        </div>
                     </div>
-
-                    <label for="payment" class="col-sm-5 col-form-label text-center">
-                        Mensalidade
-                    </label>
-                    
-                    <div class="col-sm-7">
-                        
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                
-                                <div class="input-group-text">
-                                    R$
-                                </div>
-                                
-                            </div>
-                            <input id="payment" class="form-control" type="number" placeholder="Ex.: 20,00" min="1" step="0.50" required>
+                    <hr />
+                    <div class="form-group row">
+                        <label for="contributionTime" class="col-sm-5 text-center">
+                            Tempo de contribuição
+                        </label>
+                        <div class="col-sm-7">
+                            <select id="contributionTime" class="custom-select custom-select-sm"></select>
                         </div>
-                        
+                    </div>
+                    <div class="text-center">
+                        <input id="simulate" class="btn btn-primary btn-lg text-center" type="submit" value="Simular">
                     </div>
                 </div>
-                <hr />
-                
-            <div class="form-group row">
-                
-                <label for="contributionTime" class="col-sm-5 text-center">Tempo de contribuição</label>
-                <div class="col-sm-7">
-                    <select id="contributionTime" class="custom-select custom-select-sm"></select>
-                </div>
-                
-            </div>
-            
-            <div class="text-center">
-                <input id="simulate" class="btn btn-primary btn-lg text-center" type="submit" value="Simular">
             </div>
         </form>
+    </div>
+    
+    <div id="screen2" class="container">
+        <div id="alert-outputText" class="alert alert-success">
+            <span id="outputText"></span>
+        </div>
+        <div class="row">
+            <div class="cardA green">
+                <h2>
+                    Renda Variável Bolsa
+                </h2>
+                <p id="RV"></p>
+                <p id="RVinf"></p>
+                <button onclick="RVB()" class="more">
+                    SAIBA MAIS
+                </button>
+                <div id="RVB" class="infos4">
+                    <span id="txt" class="txt">
+                        Esse é o nome do programa do Tesouro Nacional,
+                        criado em 2002, para que pessoas físicas possam
+                        comprar títulos públicos emitidos pelo governo de um jeito
+                        simples e pela internet. Existem vários tipos de Tesouro
+                        Direto disponíveis para investimento, e um dos mais
+                        conhecidos é o Tesouro Selic.
+                    </span>
+                </div>
+            </div>
+            <div class="cardA green">
+                <h2>
+                    Tesouro Selic
+                </h2>
+                <p id="TS"></p>
+                <p id="TSinf"></p>
+                <button onclick="TSC()" class="more">
+                    SAIBA MAIS
+                </button>
+                <div id="infos" class="infos">
+                    <span id="txt" class="txt">
+                        Esse é o nome do programa do Tesouro Nacional,
+                        criado em 2002, para que pessoas físicas possam
+                        comprar títulos públicos emitidos pelo governo de um jeito
+                        simples e pela internet. Existem vários tipos de Tesouro
+                        Direto disponíveis para investimento, e um dos mais
+                        conhecidos é o Tesouro Selic.
+                    </span>
+                </div>
+            </div>
+            <div class="cardA blue">
+                <h2>
+                    POUPANÇA
+                </h2>
+                <p id="PP"></p>
+                <p id="PPinf"></p>
+                <button onclick="PPC()" class="more">
+                    SAIBA MAIS
+                </button>
+                <div id="PPC" class="infos3">
+                    <span>
+                        A poupança é uma aplicação de renda fixa simples e acessível
+                        para todo mundo. Até menores de idade também podem ter uma
+                        conta em seu nome, desde que sejam representados ou assistidos
+                        pelo pai, mãe ou responsável legal.
+                        Para ter acesso, basta escolher um banco de sua preferência,
+                        apresentar alguns documentos necessários para a abertura da
+                        conta e aguardar a aprovação.
+                    </span>
+                </div>
+            </div>
+            <div class="cardA red">
+                <h2>Tesouro IPCA +</h2>
+                <p id="IPCA"></p>
+                <p id="IPCAinf"></p>
+                <button onclick="IP()" class="more">
+                    SAIBA MAIS
+                </button>
+                <div id="IP" class="infos2">
+                    <span>
+                        O Tesouro IPCA é um título público emitido pelo Governo.
+                        Seu objetivo é captar dinheiro de investidores para o
+                        Governo investir em áreas como infraestrutura, saúde e segurança.
+                        Ao aplicar nesse ativo, você estará emprestando dinheiro ao poder
+                        público. Em troca, ele paga uma taxa de juros que é híbrida. Ou
+                        seja, é uma combinação da inflação (IPCA) e de uma taxa prefixada.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <input id="simulateAgain" class="btn btn-primary btn-lg" type="button" value="Simular Novamente">
         </div>
     </div>
-</div>
-
-<div id="screen2" class="container">
-<div id="alert-outputText" class="alert alert-success">
-<span id="outputText"></span>
-</div>
-<div class="row">
-<div class="cardA green">
-<h2>Tesouro Selic</h2>
-<p id="TS"></p>
-<button onclick="TSC()" class="more">SAIBA MAIS</button>
-<div id="infos" class="infos">
-<span id="txt" class="txt">
-Esse é o nome do programa do Tesouro Nacional,
-criado em 2002, para que pessoas físicas possam
-comprar títulos públicos emitidos pelo governo de um jeito
-simples e pela internet. Existem vários tipos de Tesouro
-Direto disponíveis para investimento, e um dos mais
-conhecidos é o Tesouro Selic.
-</span>
-</div>
-</div>
-
-<div class="cardA blue">
-<h2>Tesouro IPCA +</h2>
-<p id="IPCA"></p>
-<button onclick="IP()" class="more">SAIBA MAIS</button>
-<div id="IP" class="infos2">
-<span>
-O Tesouro IPCA é um título público emitido pelo Governo.
-Seu objetivo é captar dinheiro de investidores para o
-Governo investir em áreas como infraestrutura, saúde e segurança.
-Ao aplicar nesse ativo, você estará emprestando dinheiro ao poder
-público. Em troca, ele paga uma taxa de juros que é híbrida. Ou
-seja, é uma combinação da inflação (IPCA) e de uma taxa prefixada.
-</span>
-</div>
-</div>
-
-<div class="cardA red">
-<h2>POUPANÇA</h2>
-<p id="PP"></p>
-<button onclick="PPC()" class="more">SAIBA MAIS</button>
-<div id="PPC" class="infos3">
-<span>
-A poupança é uma aplicação de renda fixa simples e acessível
-para todo mundo. Até menores de idade também podem ter uma
-conta em seu nome, desde que sejam representados ou assistidos
-pelo pai, mãe ou responsável legal.
-Para ter acesso, basta escolher um banco de sua preferência,
-apresentar alguns documentos necessários para a abertura da
-conta e aguardar a aprovação.
-</span>
-</div>
-
-</div>
-</div>
-
-<div class="text-center">
-<input id="simulateAgain" class="btn btn-primary btn-lg" type="button" value="Simular Novamente">
-</div>
-
-</div>
-
-
 </body>
-
 </html>
