@@ -1,7 +1,5 @@
-
-
 .container {
-  padding: 5vh;
+    padding: 5vh;
 }
 
 .imgLogo {
@@ -12,43 +10,42 @@
 }
 
 #title-simulator {
-  color: #FFF;
-  font-weight: bold;
+    color: #FFF;
+    font-weight: bold;
 }
 
-@media (min-height: 580px){
-  .container {
-    padding: 10vh;
-  }
+@media (min-height: 580px) {
+    .container {
+        padding: 10vh;
+    }
 }
 
 .card .card-header {
-  background-color: #007ec4;
+    background-color: #007ec4;
 }
 
 @media (max-height: 580px) and (orientation: landscape) {
-  .card .card-header {
-    display: none;
-  }
+    .card .card-header {
+        display: none;
+    }
 }
 
 #screen1, #screen2 {
-  display: block;
-  text-align: center;
-  max-width: 700px;
+    display: block;
+    text-align: center;
+    max-width: 700px;
 }
 
-
 #formCard {
-  border-width: 0;
-  box-shadow: -1vh 1vh 20px #383e41;
-  position: relative;
-  bottom: 40px;
+    border-width: 0;
+    box-shadow: -1vh 1vh 20px #383e41;
+    position: relative;
+    bottom: 40px;
 }
 
 #formCard label {
-  color: #3b4549;
-  font-weight: bold;
+    color: #3b4549;
+    font-weight: bold;
 }
 
 .btnOpt {
@@ -59,26 +56,28 @@
 }
 
 .btn {
-  background-color: #007ec4;
-  border-width: 0;
-  box-shadow: 0vh 0.45vh #003b5c;
+    background-color: #007ec4;
+    border-width: 0;
+    box-shadow: 0vh 0.45vh #003b5c;
 }
 
 .btn:hover {
-  background-color: #d63031;
+    background-color: #005f77;
+    transform: translateY(5px);
+    box-shadow: 0vh 0.45vh #002029;
 }
 
 .btn:active {
-  background-color: #d63031;
+    background-color: #d63031;
 }
 
 .btn:focus {
-  background-color: #d63031;
+    background-color: #d63031;
 }
 
 
 .btn-primary:active {
-  background-color: #d63031;
+    background-color: #d63031;
 }
 
 .resultados {
@@ -90,28 +89,28 @@
 }
 
 .row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardA {
-  border-radius: 5px;
-  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
-  padding: 30px;
-  margin: 20px;
-  width: 400px;
-  transition: all 0.3s ease-out;
+    border-radius: 5px;
+    box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+    padding: 30px;
+    margin: 20px;
+    width: 400px;
+    transition: all 0.3s ease-out;
 }
 
 .cardA:hover {
-  transform: translateY(-5px);
-  cursor: pointer;
+    transform: translateY(-5px);
+    cursor: pointer;
 }
 
 .cardA p {
-  color: #a3a5ae;
-  font-size: 16px;
+    color: #a3a5ae;
+    font-size: 16px;
 }
 
 h2 {
@@ -119,15 +118,15 @@ h2 {
 }
 
 .blue {
-  border-left: 3px solid #4895ff;
+    border-left: 3px solid #4895ff;
 }
 
 .green {
-  border-left: 3px solid #3bb54a;
+    border-left: 3px solid #3bb54a;
 }
 
 .red {
-  border-left: 3px solid #b3404a;
+    border-left: 3px solid #b3404a;
 }
 
 .more {
