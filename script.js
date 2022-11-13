@@ -44,20 +44,19 @@ $(function() {
     function start(){
         $("#screen2").hide();
         
-
         // Função que gera os meses e anos.
         (function() {
             for (let months = 1; months <= 600; months++) {
                 const value = months;
                 
-                /* Formata os meses e anos de forma 
-                que seja melhor compreendido.*/
+                // Formata os meses e anos de forma 
+                // que seja melhor compreendido.*/
                 const text = Math.floor(months / 12) != 0
                 ? Math.floor(months / 12) + " anos e " + months % 12 + " meses" 
                 : months % 12 + " meses";
                 
-                /* Manda o texto com meses e anos
-                para a pagina.*/
+                // Manda o texto com meses e anos
+                // para a pagina.
                 const optionElement = $("<option></option>");
                 optionElement.val(value);
                 optionElement.text(text);
@@ -67,27 +66,27 @@ $(function() {
         })();
     }
 
-    /* Animações suaves de mostrar e esconder
-    algum elemento.*/
+    //Animações suaves de mostrar e esconder
+    //algum elemento.
     function changeScreen(){
         $("#screen1").slideToggle("slow");
         $("#screen2").fadeToggle("slow");
     }
     
-    /* Verifica os campos input's e adiciona
-    funções a eles*/
+    //Verifica os campos input's e adiciona
+    //funções a eles
     $("#inputForm").on("submit", function() { 
         
         // Input que solicita o nome do usuário.
         const name = $("#name").val();
         // Input que solicita a mensalidade.
-        let payment = $("#payment").val();
+        const payment = $("#payment").val();
         // Input que solicita o aporte inicial.
         const valueInit = $("#value-init").val();
         // Input qye solicita o tempo de contribuição.
-        const contributionTime = $("#contributionTime").val();
+        const tempoDeContribuicao = $("#contributionTime").val();
         // Tempo de contribuição formatado.
-        const contributionTime_formatted = $(`#contributionTime option[value='${contributionTime}']`).text();
+        const tempoDeContribuicao_formatted = $(`#contributionTime option[value='${tempoDeContribuicao}']`).text();
         const interestRate = 0.517 / 100;
 
         // Valida os inputs.
@@ -98,97 +97,92 @@ $(function() {
             return 0;
         }
         
-        /* Multiplica o valor total pelos
-        meses.*/
-        let montante = (parseFloat(valueInit) + parseFloat(payment)) * parseFloat(contributionTime)
+        // Multiplica o valor total pelo meses.
+        let montante = parseFloat(valueInit) + (parseFloat(payment) * tempoDeContribuicao)
 
         // Valores dos investimentos.
-        TS = 0
+        tesouroSelic = 0
         IPCA = 0
-        PP = 0
-        RV = 0
+        poupança = 0
+        rendaVariavel = 0
         
         // Juros.
-        jct_TS = 0
-        jct_IPCA = 0
-        jct_PP = 0
-        jct_RV = 0
+        jurosTotalTS = 0
+        jurosTotalIPCA = 0
+        jurosTotalPP = 0
+        jurosTotalRV = 0
         
-        jurosAcm = parseFloat(payment)
-        jurosAcm2 = parseFloat(payment)
-        jurosAcm3 = parseFloat(payment)
-        jurosAcm4 = parseFloat(payment)
-        
-        /* Calcula as taxas e soma mês a mês  */
-        for (var i = 0; i < parseFloat(contributionTime); i++) {
-            TS = (jurosAcm * 1.07) / 100
-            jct_TS += TS
-            jurosAcm += TS
+        // Valor mensal e inicial formatados.
+        valorMensal = parseFloat(payment) 
+        valorInicial = parseFloat(valueInit)
+
+        // Calcula as taxas e soma mês a mês.
+        for (var i = 0; i < tempoDeContribuicao; i++) {
             
-            IPCA = (jurosAcm2 * 0.4) / 100
-            jct_IPCA += IPCA
-            jurosAcm3 += IPCA
+            // Cálculo de taxa TESOURO SELIC.
+            tesouroSelic = (valorInicial * 1.07) / 100
+            jurosTotalTS += tesouroSelic
+            valorInicial += tesouroSelic + valorMensal
             
-            PP = (jurosAcm3 * 0.5) / 100
-            jct_PP += PP
-            jurosAcm3 += PP
+            // Cálculo de taxa TESOURO IPCA +.
+            IPCA = (valorInicial * 0.4) / 100
+            jurosTotalIPCA += IPCA
+            valorInicial += IPCA + valorMensal
             
-            RV = (jurosAcm4 * 1.57) / 100
-            jct_RV += RV
-            jurosAcm4 += RV
+            // Cálculo de taxa POUPANÇA.
+            poupança = (valorInicial * 0.5) / 100
+            jurosTotalPP += poupança
+            valorInicial += poupança + valorMensal
+            
+            //Cálculo de taxa RENDA VARIÁVEL.
+            rendaVariavel = (valorInicial * 1.53) / 100
+            jurosTotalRV += rendaVariavel
+            valorInicial += rendaVariavel + valorMensal
         }
 
         // Soma o montante + juros
-        let valorTS = montante + jct_TS
-        let valorIPCA = montante + jct_IPCA
-        let valorPP = montante + jct_PP
-        let valorRV = montante + jct_RV
-
+        let totalTS = montante + jurosTotalTS
+        let totalIPCA = montante + jurosTotalIPCA
+        let totalPP = montante + jurosTotalPP
+        let totalRV = montante + jurosTotalRV
         
-        /* Formata os resultados obtidos nos
-        cálculos para uma melhor visualização.*/
-        let CDI_Format = new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        }).format(valorTS)
-        let IPCA_Format = new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        }).format(valorIPCA)
-        let PP_Format = new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        }).format(valorPP)
-        
+        // Formata os resultados obtidos nos
+        // cálculos para uma melhor visualização.
         let RV_Format = new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-        }).format(valorRV)
-        
+        }).format(totalRV)
+        let CDI_Format = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(totalTS)
+        let IPCA_Format = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(totalIPCA)
+        let PP_Format = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(totalPP)
         let jctTS_F = new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-        }).format(jct_TS)
-        
+        }).format(tesouroSelic)
         let jctRV_F = new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-        }).format(jct_RV)
-        
+        }).format(rendaVariavel)
         let jctPP_F = new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-        }).format(jct_PP)
-        
+        }).format(poupança)
         let jctIPCA_F = new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-        }).format(jct_IPCA)
+        }).format(IPCA)
         
-        
-        
-        /* Manda os resultados dos cálculos
-        para a página.*/
+        // Manda os resultados dos cálculos
+        // para a página.
         $("#TS").html("Valor Total: " + CDI_Format)
         $("#IPCA").html(IPCA_Format)
         $("#PP").html(PP_Format)
@@ -205,7 +199,7 @@ $(function() {
         
         // Mensagem de sucesso.
         const output = `Olá <strong>${name}</strong>, aqui está uma estimativa
-        do quanto R$${payment} pode render em ${contributionTime_formatted}.`
+        do quanto R$${payment} pode render em ${tempoDeContribuicao_formatted}.`
         $("#outputText").html(output)
 
         changeScreen();
