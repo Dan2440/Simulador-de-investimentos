@@ -113,31 +113,38 @@ $(function() {
         jurosTotalRV = 0
         
         // Valor mensal e inicial formatados.
-        valorMensal = parseFloat(payment) 
-        valorInicial = parseFloat(valueInit)
+        valorMensalRV = parseFloat(payment) 
+        valorMensalTS = parseFloat(payment)
+        valorMensalIPCA = parseFloat(payment)
+        valorMensalPP = parseFloat(payment)
+
+        valorInicialRV = parseFloat(valueInit)
+        valorInicialTS = parseFloat(valueInit)
+        valorInicialIPCA = parseFloat(valueInit)
+        valorInicialPP = parseFloat(valueInit)
 
         // Calcula as taxas e soma mês a mês.
         for (var i = 0; i < tempoDeContribuicao; i++) {
             
             // Cálculo de taxa TESOURO SELIC.
-            tesouroSelic = (valorInicial * 1.07) / 100
+            tesouroSelic = (valorInicialTS * 1.07) / 100
             jurosTotalTS += tesouroSelic
-            valorInicial += tesouroSelic + valorMensal
+            valorInicialTS += tesouroSelic + valorMensalTS
             
             // Cálculo de taxa TESOURO IPCA +.
-            IPCA = (valorInicial * 0.4) / 100
+            IPCA = (valorInicialIPCA * 0.4) / 100
             jurosTotalIPCA += IPCA
-            valorInicial += IPCA + valorMensal
+            valorInicialIPCA += IPCA + valorMensalIPCA
             
             // Cálculo de taxa POUPANÇA.
-            poupança = (valorInicial * 0.5) / 100
+            poupança = (valorInicialPP * 0.5) / 100
             jurosTotalPP += poupança
-            valorInicial += poupança + valorMensal
+            valorInicialPP += poupança + valorMensalPP
             
             //Cálculo de taxa RENDA VARIÁVEL.
-            rendaVariavel = (valorInicial * 1.53) / 100
+            rendaVariavel = (valorInicialRV * 1.53) / 100
             jurosTotalRV += rendaVariavel
-            valorInicial += rendaVariavel + valorMensal
+            valorInicialRV += rendaVariavel + valorMensalRV
         }
 
         // Soma o montante + juros
