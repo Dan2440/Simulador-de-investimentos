@@ -13,10 +13,16 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="screen1" class="container">
-        <div class="logo">
-            <img class="imgLogo" src="logo.png">
-        </div>
+    <div>
+        <img src="/assets/images/logoSenai.png" class="logoSenai"> 
+    </div>
+    <div>
+        <img src="/assets/images/logoCESP.png" class="logoCESP"> 
+    </div>
+    <div id="screen1" class="container parralax">
+        <!---<div class="logo">
+            <img class="imgLogo" src="/assets/images/logo.png">
+        </div>--->
         <form id="inputForm" action="javascript:void(0);">
             <div id="formCard" class="card">
                 <div class="card-header text-center">
@@ -30,7 +36,7 @@
                             Nome
                         </label>
                         <div class="col-sm-7">
-                            <input id="name" class="form-control" type="text" required>
+                            <input autocomplete="off" id="name" class="form-control" type="text" required>
                         </div>
                     </div>
                     <hr />
@@ -86,7 +92,7 @@
         <div class="row">
             <div class="cardA green">
                 <h2>
-                    Renda Variável Bolsa
+                    CDB
                 </h2>
                 <p id="RV"></p>
                 <p id="RVinf"></p>
